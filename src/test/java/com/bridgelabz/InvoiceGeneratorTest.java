@@ -40,4 +40,19 @@ public class InvoiceGeneratorTest {
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 120);
         Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
     }
+
+    @Test
+    public void givenTwoDifferentRidesPremiumAndNormalRide_FindTotalFareSummary() {
+        double distance = 10;
+        int time = 15;
+        Assert.assertEquals(115, generator.calculateFare(distance, time), 0.0);
+        Assert.assertEquals(230, generator.calculatePremiumFare(distance, time), 0.0);
+    }
+
+    @Test
+    public void premiumMinimumFare() {
+        double distance = 0.1;
+        int time = 1;
+        Assert.assertEquals(20, generator.calculatePremiumFare(distance, time), 0.0);
+    }
 }
